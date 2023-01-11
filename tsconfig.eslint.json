@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "types": [
+      "@types/node"
+    ],
+  },
+  "extends": "./tsconfig.json",
+  "include": [
+    "app/**/*.test.ts",
+    "app/server.ts"
+  ]
+}
