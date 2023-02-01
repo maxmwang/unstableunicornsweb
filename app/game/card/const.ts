@@ -1,0 +1,14 @@
+export enum CardType {
+  INSTANT,
+  UPGRADE,
+  DOWNGRADE,
+  MAGIC,
+  BABY_UNICORN,
+  BASIC_UNICORN,
+  MAGICAL_UNICORN,
+  ULTIMATE_UNICORN,
+}
+
+export enum DeckSource {
+  STANDARD,
+}
