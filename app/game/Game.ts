@@ -1,3 +1,5 @@
+import type { Socket } from 'socket.io';
+
 import EventManager from './utils/EventManager';
 import type Observer from './utils/Observer';
 import Event from './utils/Event';
@@ -9,12 +11,8 @@ import Deck from './card/Deck';
 import Discard from './card/Discard';
 import Stack from './card/Stack';
 import { DeckSource } from './card/const';
+import { GamePhases, TurnPhases } from './const';
 
-enum GamePhases {
-  LOBBY,
-  ONGOING,
-  OVER,
-}
 /**
  * Serves as the Mediator in the Mediator pattern. As such,
  * players will have a reference to their game object.
@@ -87,11 +85,11 @@ class Game implements Observer {
     }
   }
 
-  addPlayer(name: string) {
+  addPlayer(name: string, socket: Socket) {
     if (this.phase !== GamePhases.LOBBY) {
       throw new Error('Game has already started.');
     }
-    this._players.push(new Player(name, this));
+    this._players.push(new Player(name, socket, this));
   }
 
   removePlayer(name: string) {
@@ -126,50 +124,29 @@ class Game implements Observer {
       this._players[j] = temp;
     }
 
+    // players pick a baby unicorn
+
     // players start with 5 cards in hand
     this._players.forEach((player) => {
       player.draw(5);
     });
 
-    /**
-     * Game loop. Lifecycle of a turn:
-     * 1. notify TURN_START
-     * 2. player.turn_start()
-     * 3. player.draw()
-     * 4. player.play()
-     * 6. notify TURN_END
-     * 7. increment turn
-     *
-     * TODO: add a way to end the game in middle of loop
-     */
     while (this.phase === GamePhases.ONGOING) {
-      const currentPlayerInTurn = this.getCurrentPlayerInTurn();
+      this.getCurrentPlayerInTurn().action();
 
-      this.eventManager.notify(Event.TURN_START, {
-        game: this,
-        currentPlayerInTurn,
-      });
-
-      currentPlayerInTurn.draw();
-      currentPlayerInTurn.play();
-
-      this.eventManager.notify(Event.TURN_END, {
-        game: this,
-        currentPlayerInTurn,
-      });
-
-      this.increment_turn();
+      // slow down the game loop
+      setTimeout(() => {}, 10);
     }
   }
 
-  increment_turn() {
+  incrementTurn() {
     this._turn = (this._turn + 1) % this._players.length;
   }
 
   /**
    * Used for "Change of Luck" (id: 0058)
    */
-  decrement_turn() {
+  decrementTurn() {
     this._turn = this._turn - 1 < 0 ? this._players.length - 1 : this._turn - 1;
   }
 

@@ -1,6 +1,3 @@
-import type Event from '../../utils/Event';
-import type { EventPayload } from '../../utils/Event';
-
 import type Player from '../../Player';
 import { CardType } from '../const';
 import StableCard from '../StableCard';
@@ -10,8 +7,6 @@ import StableCard from '../StableCard';
  */
 class BabyUnicorn extends StableCard {
   readonly type = CardType.BABY_UNICORN;
-
-  onNotify(event: Event, payload: EventPayload) : void {}
 
   override onDestroy(): void {
     if (!this.inStable || !this.player) {

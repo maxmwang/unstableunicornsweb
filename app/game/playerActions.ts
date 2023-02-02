@@ -1,19 +1,39 @@
-interface PlayerAction {
+import type Card from './card/Card';
 
+export interface PlayerActionPayload {
+  actionName: PlayerActionNames;
+  targetPlayerId?: Player['id'];
+  targetCardId?: Card['id'];
 }
 
-enum PlayerActions {
+export enum PlayerActionNames {
   /**
    * In the action phase, players can choose to:
    * - play a card
    * - draw a (second) card
+   *
+   * PlayerAction:
+   * - targetCardId: the chosen card
    */
-  PLAY,
-  DRAW,
+  PLAY = 'PLAY',
+  DRAW = 'DRAW',
 
-  DESTROY,
-  SACRIFICE,
-  RETURN_TO_HAND,
-  DISCARD,
+  /**
+   * When prompted to choose a card
+   *
+   * PlayerAction:
+   * - targetCardId: the chosen card
+   */
+  DESTROY = 'DESTROY',
+  SACRIFICE = 'SACRIFICE',
+  RETURN_TO_HAND = 'RETURN_TO_HAND',
+  DISCARD = 'DISCARD',
+
+  /**
+   * When prompted to choose a player
+   *
+   * PlayerAction:
+   * - targetPlayerId: the chosen player
+   */
 
 }

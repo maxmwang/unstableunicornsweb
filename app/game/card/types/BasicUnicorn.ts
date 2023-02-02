@@ -1,6 +1,3 @@
-import type Event from '../../utils/Event';
-import type { EventPayload } from '../../utils/Event';
-
 import { CardType } from '../const';
 import StableCard from '../StableCard';
 
@@ -9,8 +6,6 @@ import StableCard from '../StableCard';
  */
 class BabyUnicorn extends StableCard {
   readonly type = CardType.BASIC_UNICORN;
-
-  onNotify(event: Event, payload: EventPayload) : void {}
 }
 
 export default BabyUnicorn;

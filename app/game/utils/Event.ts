@@ -55,7 +55,7 @@ enum Event {
    * - game
    * - currentPlayerInTurn - the player whose turn is starting
    */
-  TURN_START,
+  BEGINNING_OF_TURN,
 
   /**
    * A player's turn starts.
@@ -68,7 +68,7 @@ enum Event {
    * - previousPlayerInTurn - the player before the player whose turn is ending
    * - currentPlayerInTurn - the player whose turn is ending
    */
-  TURN_END,
+  END_OF_TURN,
 
   /**
    * The end of the game.

@@ -1,4 +1,3 @@
-import { runInThisContext } from 'vm';
 import type Observer from '../utils/Observer';
 import Event from '../utils/Event';
 import type { EventPayload } from '../utils/Event';
@@ -88,9 +87,19 @@ abstract class Card implements Observer {
     this.canTarget = true;
   }
 
-  abstract onNotify(event: Event, payload: EventPayload) : void;
+  onNotify(event: Event, payload: EventPayload) {}
 
-  abstract onPlay(player: Player) : void;
+  onPlay() {
+    if (!this.inStable || !this.player) {
+      return;
+    }
+
+    this.enterStable(this.player);
+  }
+
+  beginningOfTurnPhase() {}
+
+  endOfTurnPhase() {}
 
   enterHand(player: Player) {
     if (this.player) {
