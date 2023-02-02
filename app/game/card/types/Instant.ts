@@ -1,4 +1,4 @@
-import Player from '../../Player';
+import type Player from '../../Player';
 import Card from '../Card';
 import { CardType } from '../const';
 

@@ -1,10 +1,9 @@
-import type Observer from '../utils/Observer';
-import Event from '../utils/Event';
-import type { EventPayload } from '../utils/Event';
-
+import type { CardType } from './const';
 import type Game from '../Game';
 import type Player from '../Player';
-import { CardType } from './const';
+import Event from '../utils/Event';
+import type { EventPayload } from '../utils/Event';
+import type Observer from '../utils/Observer';
 
 /**
  * ...

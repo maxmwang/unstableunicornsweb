@@ -1,10 +1,10 @@
 import type { Socket } from 'socket.io';
 
-import Event from './utils/Event';
-
-import type Game from './Game';
 import type Card from './card/Card';
-import { TurnPhases, PlayerActionPayload, PlayerActionNames } from './const';
+import type { PlayerActionNames, PlayerActionPayload } from './const';
+import { TurnPhases } from './const';
+import type Game from './Game';
+import Event from './utils/Event';
 
 class Player {
   /**

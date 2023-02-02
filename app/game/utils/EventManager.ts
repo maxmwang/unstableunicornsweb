@@ -1,6 +1,6 @@
-import Observer from './Observer';
 import type Event from './Event';
 import type { EventPayload } from './Event';
+import type Observer from './Observer';
 
 /**
  * EventManager is a class that manages the events based on the Observer paradigm

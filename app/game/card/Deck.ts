@@ -1,7 +1,6 @@
-import type Player from '../Player';
 import type Card from './Card';
-import SearchableCards from './SearchableCards';
 import type { DeckSource } from './const';
+import SearchableCards from './SearchableCards';
 
 /**
  * A wrapper class for the deck of cards. Cards are drawn from here.

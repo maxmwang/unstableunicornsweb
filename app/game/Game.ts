@@ -1,17 +1,16 @@
 import type { Socket } from 'socket.io';
 
-import EventManager from './utils/EventManager';
-import type Observer from './utils/Observer';
-import Event from './utils/Event';
-import type { EventPayload } from './utils/Event';
-
-import Player from './Player';
-import Card from './card/Card';
+import type Card from './card/Card';
+import { DeckSource } from './card/const';
 import Deck from './card/Deck';
 import Discard from './card/Discard';
 import Stack from './card/Stack';
-import { DeckSource } from './card/const';
 import { GamePhases, TurnPhases } from './const';
+import Player from './Player';
+import type { EventPayload } from './utils/Event';
+import Event from './utils/Event';
+import EventManager from './utils/EventManager';
+import type Observer from './utils/Observer';
 
 /**
  * Serves as the Mediator in the Mediator pattern. As such,

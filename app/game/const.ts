@@ -1,5 +1,5 @@
-import type Player from './Player';
 import type Card from './card/Card';
+import type Player from './Player';
 
 export interface PlayerActionPayload {
   actionName: PlayerActionNames;

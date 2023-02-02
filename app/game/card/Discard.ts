@@ -1,4 +1,3 @@
-import type Card from './Card';
 import SearchableCards from './SearchableCards';
 
 /**
