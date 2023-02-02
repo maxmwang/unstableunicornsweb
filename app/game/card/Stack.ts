@@ -7,11 +7,11 @@ import type Card from './Card';
 class Stack {
   cards: Card[] = [];
 
-  addCard(card: Card) {
+  push(card: Card) {
     this.cards.push(card);
   }
 
-  removeCard(i: number): Card {
+  concat(i: number): Card {
     return this.cards.splice(i, 1)[0];
   }
 }

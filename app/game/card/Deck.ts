@@ -5,6 +5,8 @@ import type { DeckSource } from './const';
 
 /**
  * A wrapper class for the deck of cards. Cards are drawn from here.
+ *
+ * Top of the deck is the back of the array.
  */
 class Deck extends SearchableCards {
   /**
@@ -37,14 +39,25 @@ class Deck extends SearchableCards {
     }
   }
 
-  draw(player: Player, i: number = 1) {
+  getNurseryCards(): Card[] {
+    return [];
+  }
+
+  draw(i: number): Card[] {
     if (i > this.cards.length) {
       throw new Error('Not enough cards in deck.');
     }
     const cards = this.cards.splice(this.cards.length - i, i);
 
-    cards.forEach((card) => card.onDraw(player));
-    player.hand.concat(cards);
+    return cards;
+  }
+
+  push(card: Card) {
+    this.cards.splice(0, 0, card);
+  }
+
+  concat(cards: Card[]) {
+    this.cards = cards.concat(this.cards);
   }
 }
 

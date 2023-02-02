@@ -4,6 +4,7 @@ import Event from './utils/Event';
 import type { EventPayload } from './utils/Event';
 
 import Player from './Player';
+import Card from './card/Card';
 import Deck from './card/Deck';
 import Discard from './card/Discard';
 import Stack from './card/Stack';
@@ -56,6 +57,11 @@ class Game implements Observer {
   discard: Discard = new Discard();
 
   /**
+   * The nursery. Baby Unicorns are placed here.
+   */
+  nursery: Card[] = [];
+
+  /**
    * The stack. Currently playing cards are placed here on a LIFO basis.
    */
   private _stack: Stack = new Stack();
@@ -68,7 +74,10 @@ class Game implements Observer {
   // TODO: game options (e.g. deck source)
   constructor(code: string, deckSource: DeckSource = DeckSource.STANDARD) {
     this.code = code;
+
     this.deck = new Deck(deckSource);
+    this.nursery = this.deck.getNurseryCards();
+
     this.eventManager.subscribe(this);
   }
 
@@ -90,8 +99,8 @@ class Game implements Observer {
       // if game has started, move all cards to discard pile
       const player = this._players.find((p) => p.name === name);
       if (player) {
-        this.discard.addSomeCards(player.hand);
-        this.discard.addSomeCards(player.stable);
+        this.discard.concat(player.hand);
+        this.discard.concat(player.stable);
       }
     }
 
@@ -130,9 +139,11 @@ class Game implements Observer {
      * 4. player.play()
      * 6. notify TURN_END
      * 7. increment turn
+     *
+     * TODO: add a way to end the game in middle of loop
      */
     while (this.phase === GamePhases.ONGOING) {
-      const currentPlayerInTurn = this._players[this._turn];
+      const currentPlayerInTurn = this.getCurrentPlayerInTurn();
 
       this.eventManager.notify(Event.TURN_START, {
         game: this,
@@ -160,6 +171,10 @@ class Game implements Observer {
    */
   decrement_turn() {
     this._turn = this._turn - 1 < 0 ? this._players.length - 1 : this._turn - 1;
+  }
+
+  getCurrentPlayerInTurn(): Player {
+    return this._players[this._turn];
   }
 }
 

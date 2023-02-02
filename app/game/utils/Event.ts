@@ -13,7 +13,6 @@ enum Event {
    * - game
    * - currentPlayerInTurn
    * - targetPlayer - the player that owns the stable
-   * - currentCardInPlay
    * - targetCard - the card that entered the stable
    */
   CARD_ENTER_STABLE,
@@ -28,9 +27,9 @@ enum Event {
    * - game
    * - currentPlayerInTurn
    * - targetPlayer - the player that owns the stable
-   * - targetCard - the card that entered the stable
+   * - targetCard - the card that left the stable
    */
-  CARD_EXIT_STABLE,
+  CARD_LEAVE_STABLE,
 
   /**
    * A player chose a card to be destroyed.

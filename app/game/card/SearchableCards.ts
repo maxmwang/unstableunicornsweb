@@ -5,6 +5,14 @@ abstract class SearchableCards {
 
   abstract shuffle(count: number): void;
 
+  push(card: Card): void {
+    this.cards.push(card);
+  }
+
+  concat(cards: Card[]): void {
+    this.cards.concat(cards);
+  }
+
   /**
    * A function that returns a list of cards that match the query.
    */

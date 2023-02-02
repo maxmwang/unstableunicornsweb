@@ -23,13 +23,21 @@ class Player {
    */
   hand: Card[] = [];
 
+  /**
+   * The Player's next action to be taken in the game.
+   * In the game loop checks if this is non-null and executes the action.
+   */
+  nextAction: Action;
+
   constructor(name: string, game: Game) {
     this.name = name;
     this._game = game;
   }
 
   draw(i: number = 1) {
-    this._game.deck.draw(this);
+    const cards = this._game.deck.draw(i);
+
+    cards.forEach((card) => card.enterHand(this));
   }
 
   play() {
