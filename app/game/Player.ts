@@ -4,8 +4,7 @@ import Event from './utils/Event';
 
 import type Game from './Game';
 import type Card from './card/Card';
-import { PlayerActionPayload, PlayerActionNames } from './playerActions';
-import { TurnPhases } from './const';
+import { TurnPhases, PlayerActionPayload, PlayerActionNames } from './const';
 
 class Player {
   /**
